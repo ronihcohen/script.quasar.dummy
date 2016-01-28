@@ -1,10 +1,10 @@
 # coding: utf-8
 
-# First, you need to import the pulsar module
-# Make sure you declare Pulsar as dependency in the addon.xml or it won't work
+# First, you need to import the quasar module
+# Make sure you declare Quasar as dependency in the addon.xml or it won't work
 # You can read it at:
-# https://github.com/steeve/plugin.video.pulsar/blob/master/resources/site-packages/pulsar/provider.py
-from pulsar import provider
+# https://github.com/scakemyer/plugin.video.quasar/blob/master/resources/site-packages/quasar/provider.py
+from quasar import provider
 
 
 # Raw search
@@ -19,7 +19,7 @@ def search(query):
 #     items = resp.json()
 # To parse XML you can do:
 #     dom = resp.xml()
-# If you have RSS, you can let Pulsar parse it for you with:
+# If you have RSS, you can let Quasar parse it for you with:
 #     return provider.parse_rss(resp.xml())
 
 

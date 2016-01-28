@@ -1,43 +1,43 @@
 Introduction
 ===================
-This is a sample dummy provider for Pulsar.
+This is a sample dummy provider for Quasar.
 
 **PLEASE NOTE THAT THIS IS SUBJECT TO CHANGE QUITE HEAVILY**
 
-When Pulsar wants to find a stream for a media, it will call all the providers installed on the locally running XBMC instance.
+When Quasar wants to find a stream for a media, it will call all the providers installed on the locally running XBMC instance.
 
-To be recognized as a Pulsar provider, the addon's name has to start with `script.pulsar.`.
+To be recognized as a Quasar provider, the addon's name has to start with `script.quasar.`.
 
-Pulsar will round up all the matching addons and call them using `XBMC.RunAddon()`.
+Quasar will round up all the matching addons and call them using `XBMC.RunAddon()`.
 
 Testing providers
 =================
 
-You can test your provider by calling Pulsar on these endpoints
+You can test your provider by calling Quasar on these endpoints
 
 ```
 http://localhost:10001/provider/<PROVIDER_ID>/movie/<IMDB_ID>
 http://localhost:10001/provider/<PROVIDER_ID>/show/<TVDB_ID>/season/<SEASON>/episode/<EPISODE>
 ```
 
-It will print the search payload and the return results, as interpreted by Pulsar.
+It will print the search payload and the return results, as interpreted by Quasar.
 
 
 Provider SDK
 ============
 
-Pulsar ships with a provider SDK that unifies some of tasks commonly found in providers. For lack of PyDoc, we'll document this here for now.
+Quasar ships with a provider SDK that unifies some of tasks commonly found in providers. For lack of PyDoc, we'll document this here for now.
 
-To use this SDK, you must declare Pulsar as a dependency for your provider and import the module
+To use this SDK, you must declare Quasar as a dependency for your provider and import the module
 
 ```
-<import addon="plugin.video.pulsar" version="0.2"/>
+<import addon="plugin.video.quasar" version="0.9.1"/>
 ```
 
 Then in your provider module:
 
 ```python
-from pulsar import provider
+from quasar import provider
 ```
 
 
@@ -55,7 +55,7 @@ The SDK gives you access to the `xbmcaddon.Addon` by default using these symbols
 ```python
 provider.register(search, search_movie, search_episode)
 ```
-Registers your search methods to Pulsar. They can be either methods, or `None`.
+Registers your search methods to Quasar. They can be either methods, or `None`.
 
 - `search (func or None)` the generic search function
 - `search_movie (func or None)` the search function for movies
@@ -123,7 +123,7 @@ Sends a XBMC notification.
 ```python
 provider.append_headers(uri, headers)
 ```
-Appends headers after a `uri` for Pulsar to use when downloading non magnets, if needed.
+Appends headers after a `uri` for Quasar to use when downloading non magnets, if needed.
 
 - `uri (string)` the uri
 - `headers (dict)` custom headers
@@ -149,7 +149,7 @@ provider.log.critical(message)
 Result objects
 ==============
 
-Pulsar expects provider to return a `list` of `dict`s with the following keys:
+Quasar expects provider to return a `list` of `dict`s with the following keys:
 
 ```json
 {
@@ -169,11 +169,11 @@ Pulsar expects provider to return a `list` of `dict`s with the following keys:
 }
 ```
 
-Pulsar needs to now about uniqueness. This is why Pulsar needs to know about the `info_hash`. Pulsar has several options to know it:
+Quasar needs to now about uniqueness. This is why Quasar needs to know about the `info_hash`. Quasar has several options to know it:
 
 - you provide it yourself by setting `info_hash`
 - you set `uri` to a magnet link
-- Pulsar will download the `.torrent` file and figure it out itself
+- Quasar will download the `.torrent` file and figure it out itself
 
 Keep in mind the 3rd options is potentially costly if there are lots of results (although it is not counted in the provider timeout). This step is called *resolving*.
 
@@ -192,22 +192,22 @@ myfile["uri"] = provider.append_headers(myfile["uri"], {
 })
 ```
 
-Finally, there is no use to send more than a page worth of links to Pulsar, as they are supposed to be relevant anyway.
+Finally, there is no use to send more than a page worth of links to Quasar, as they are supposed to be relevant anyway.
 
 
 
 About quality and availability
 ------------------------------
 
-When deciding which stream to choose, Pulsar tries to be smart and make a balance between quality and availability. For that reason it is crucial that you properly set the quality settings in your object if you have them (`resolution`, `video_codec`, `audio_codec`, `rip_type` and `scene_rating`). See `provider.py` for the possible values.
+When deciding which stream to choose, Quasar tries to be smart and make a balance between quality and availability. For that reason it is crucial that you properly set the quality settings in your object if you have them (`resolution`, `video_codec`, `audio_codec`, `rip_type` and `scene_rating`). See `provider.py` for the possible values.
 
-If you don't set them, Pulsar will try to guess them from the `name`.
+If you don't set them, Quasar will try to guess them from the `name`.
 
 
 Query payload
 =============
 
-Pulsar tries to give you the most it can for your provider to make an informed decision when giving back streams.
+Quasar tries to give you the most it can for your provider to make an informed decision when giving back streams.
 
 About backward compatibility
 ----------------------------
@@ -240,7 +240,7 @@ Here is a sample movie payload
 
 Note that an IMDB id is the best way to search for a movie. If you can't use that, a title + year is a good differentiator, too.
 
-Pulsar will also give you international titles for the movie you're searching. Note that these are *countries* and **not** languages (ISO 3166-1).
+Quasar will also give you international titles for the movie you're searching. Note that these are *countries* and **not** languages (ISO 3166-1).
 
 
 Episode payload
@@ -262,4 +262,4 @@ Here is a sample episode payload
 Conclusion
 ==========
 
-Hopefully you have everything you need to know to write good providers. Don't hesitate to ping @pulsarhq on Twitter.
+Hopefully you have everything you need to know to write good providers.
