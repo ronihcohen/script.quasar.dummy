@@ -151,21 +151,22 @@ Result objects
 
 Quasar expects provider to return a `list` of `dict`s with the following keys:
 
-```json
+```
 {
-	"name": string
-	"uri": string
-	"info_hash": string
-	"trackers": [string, ...]
-	"size": int
-	"seeds": int
-	"peers": int
-	"resolution": int
-	"video_codec": int
-	"audio_codec": int
-	"rip_type": int
-	"scene_rating": int
-	"language": string (ISO 639-1)
+	"name": "string", // Name of the torrent
+	"uri": "string", // URI
+	"info_hash": "string", // Torrent hash
+	"trackers": ["string", "..."], // List of trackers
+	"size": "string", // Reported size of the torrent
+	"provider": "string", // Name of this provider
+	"seeds": int,
+	"peers": int,
+	"resolution": int,
+	"video_codec": int,
+	"audio_codec": int,
+	"rip_type": int,
+	"scene_rating": int,
+	"language": "string (ISO 639-1)"
 }
 ```
 
