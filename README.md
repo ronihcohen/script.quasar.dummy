@@ -16,8 +16,8 @@ Testing providers
 You can test your provider by calling Quasar on these endpoints
 
 ```
-http://localhost:10001/provider/<PROVIDER_ID>/movie/<IMDB_ID>
-http://localhost:10001/provider/<PROVIDER_ID>/show/<TVDB_ID>/season/<SEASON>/episode/<EPISODE>
+http://localhost:10001/provider/<PROVIDER_ID>/movie/<TMDB_ID>
+http://localhost:10001/provider/<PROVIDER_ID>/show/<TMDB_ID>/season/<SEASON>/episode/<EPISODE>
 ```
 
 It will print the search payload and the return results, as interpreted by Quasar.
@@ -53,13 +53,14 @@ The SDK gives you access to the `xbmcaddon.Addon` by default using these symbols
 
 ---
 ```python
-provider.register(search, search_movie, search_episode)
+provider.register(search, search_movie, search_episode, search_season)
 ```
 Registers your search methods to Quasar. They can be either methods, or `None`.
 
 - `search (func or None)` the generic search function
 - `search_movie (func or None)` the search function for movies
 - `search_episode (func or None)` the search function for episodes
+- `search_season (func or None)` the search function for seasons
 
 ---
 ```python
@@ -159,6 +160,7 @@ Quasar expects provider to return a `list` of `dict`s with the following keys:
 	"trackers": ["string", "..."], // List of trackers
 	"size": "string", // Reported size of the torrent
 	"provider": "string", // Name of this provider
+	"icon": "string", // Icon path for this provider
 	"seeds": int,
 	"peers": int,
 	"resolution": int,

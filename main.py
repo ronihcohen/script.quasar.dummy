@@ -10,7 +10,8 @@ from quasar import provider
 # Raw search
 # query is always a string
 def search(query):
-    # Will issue a GET call to http://foo.bar/search?q=query (properly urlencoded)
+    # Will issue a GET call to http://foo.bar/search?q=query
+    # (properly urlencoded)
     resp = provider.GET("http://foo.bar/search", params={
         "q": query,
     })
@@ -21,19 +22,6 @@ def search(query):
 #     dom = resp.xml()
 # If you have RSS, you can let Quasar parse it for you with:
 #     return provider.parse_rss(resp.xml())
-
-
-# Episode Payload Sample
-# {
-#     "imdb_id": "tt0092400",
-#     "tvdb_id": "76385",
-#     "title": "married with children",
-#     "season": 1,
-#     "episode": 1,
-#     "titles": null
-# }
-def search_episode(episode):
-    return search("%(title)s S%(season)02dE%(episode)02d" % episode)
 
 
 # Movie Payload Sample
@@ -51,8 +39,33 @@ def search_episode(episode):
 #     }
 # }
 def search_movie(movie):
-    return search("%(title)s %(year)d" % movie)
+        return search("%(title)s %(year)d" % movie)
+
+
+# Episode Payload Sample
+# {
+#     "imdb_id": "tt0092400",
+#     "tvdb_id": "76385",
+#     "title": "married with children",
+#     "season": 1,
+#     "episode": 1,
+#     "titles": null
+# }
+def search_episode(episode):
+    return search("%(title)s S%(season)02dE%(episode)02d" % episode)
+
+
+# Episode Payload Sample
+# {
+#     "imdb_id": "tt0092400",
+#     "tvdb_id": "76385",
+#     "title": "married with children",
+#     "season": 1,
+#     "titles": null
+# }
+def search_season(season):
+    return search("%(title)s Season %(season)d" % season)
 
 
 # This registers your module for use
-provider.register(search, search_movie, search_episode)
+provider.register(search, search_movie, search_episode, search_season)
