@@ -16,8 +16,8 @@ Testing providers
 You can test your provider by calling Quasar on these endpoints
 
 ```
-http://localhost:10001/provider/<PROVIDER_ID>/movie/<TMDB_ID>
-http://localhost:10001/provider/<PROVIDER_ID>/show/<TMDB_ID>/season/<SEASON>/episode/<EPISODE>
+http://localhost:65251/provider/<PROVIDER_ID>/movie/<TMDB_ID>
+http://localhost:65251/provider/<PROVIDER_ID>/show/<TMDB_ID>/season/<SEASON>/episode/<EPISODE>
 ```
 
 It will print the search payload and the return results, as interpreted by Quasar.
